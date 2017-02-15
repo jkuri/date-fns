@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import listFiles from './_lib/list_files'
+import listFiles from './_lib/listFiles'
 
 const files = listFiles()
 
