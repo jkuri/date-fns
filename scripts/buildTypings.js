@@ -134,8 +134,7 @@ function getTypeScriptDateFnsModuleDefinition (moduleSuffix, fns) {
 
 function getTypeScriptFnModuleDefinition (moduleSuffix, fnSuffix, isDefault, fn) {
   const name = fn.content.name
-  const snakeCaseName = fn.file.snakeCaseName
-  const moduleName = `date-fns${moduleSuffix}/${snakeCaseName}${fnSuffix}`
+  const moduleName = `date-fns${moduleSuffix}/${name}${fnSuffix}`
 
   const definition = [`declare module '${moduleName}' {`]
     .concat(`  import {${name}} from 'date-fns${moduleSuffix}'`)
@@ -161,8 +160,8 @@ function getTypeScriptFnDefinition (fn) {
 }
 
 function getTypeScriptLocaleModuleDefinition (moduleSuffix, localeSuffix, isDefault, locale) {
-  const snakeCaseName = locale.snakeCaseName
-  const name = `date-fns${moduleSuffix}/locale/${snakeCaseName}${localeSuffix}`
+  const code = locale.code
+  const name = `date-fns${moduleSuffix}/locale/${code}${localeSuffix}`
 
   const definition = [`declare module '${name}' {`]
     .concat('  const locale: Locale')
@@ -221,8 +220,8 @@ function getFlowTypeAlias (type) {
 }
 
 function generateFlowFnTyping (fn, aliasDeclarations) {
-  const snakeCaseName = fn.file.snakeCaseName
-  const filename = `./src/${snakeCaseName}/index.js.flow`
+  const name = fn.file.name
+  const filename = `./src/${name}/index.js.flow`
 
   const params = getParams(fn.content.params, {indent: 0, leftBorder: '(', rightBorder: ')'})
   const returns = getType(fn.content.returns[0].type.names)
